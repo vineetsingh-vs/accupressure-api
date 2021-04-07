@@ -1,15 +1,9 @@
 import { Document } from 'mongoose';
 
-export interface Login extends Document {
+export interface User extends Document {
 	id?: string;
 	fullName: string;
-	userName: string;
+	emailId: string;
 	password: string;
-	email: string;
-	mobile: string;
-	gender: string;
-	profession: string;
-	city: string;
-	country: string;
-	joining: Date
+	orderId: string;
 }

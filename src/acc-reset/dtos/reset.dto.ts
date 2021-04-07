@@ -1,4 +1,5 @@
 export class ResetDTO {
-	public readonly userName: string;
-	public readonly password: string;
+	public readonly emailId: string;
+	public readonly oldPassword: string;
+	public readonly newPassword: string;
 }

@@ -7,7 +7,7 @@ import {ResetDTO} from "./dtos/reset.dto";
 @Injectable()
 export class AccResetService {
     constructor(@InjectModel('User') private readonly loginModel: Model<User>) {}
-    public async resetPassword(userDetail: ResetDTO): Promise<String> {
+    public async resetPassword(userDetail: ResetDTO): Promise<boolean> {
         let data;
         if(userDetail.emailId.length > 0 && userDetail.oldPassword.length > 0 && userDetail.newPassword.length > 0) {
             data = {
@@ -18,7 +18,9 @@ export class AccResetService {
          const user = await this.loginModel.findOne(data);
      //   user.password = userDetail.newPassword;
         debugger;
-        const newUser = await this.loginModel.updateOne({'id' : user.id}, {$set: { 'password' : userDetail.newPassword}});
-        return JSON.stringify((newUser || {}).emailId);
+
+        await this.loginModel.updateOne({'emailId' : user.emailId}, {$set: { 'password' : userDetail.newPassword}});
+        return Promise.resolve(true);
+      //  return JSON.stringify((newUser || {}).emailId);
     }
 }

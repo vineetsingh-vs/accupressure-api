@@ -10,7 +10,7 @@ export class AccResetController {
     }
 
     @Post()
-    public reset(@Body() reset: ResetDTO): Promise<String> {
+    public reset(@Body() reset: ResetDTO): Promise<boolean> {
         return this.resetService.resetPassword(reset);
     }
 }

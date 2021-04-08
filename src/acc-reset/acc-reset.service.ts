@@ -16,11 +16,10 @@ export class AccResetService {
             };
         }
          const user = await this.loginModel.findOne(data);
-     //   user.password = userDetail.newPassword;
-        debugger;
-
-        await this.loginModel.updateOne({'emailId' : user.emailId}, {$set: { 'password' : userDetail.newPassword}});
-        return Promise.resolve(true);
-      //  return JSON.stringify((newUser || {}).emailId);
+        if (!!user) {
+            await this.loginModel.updateOne({'emailId' : user.emailId}, {$set: { 'password' : userDetail.newPassword}});
+            return Promise.resolve(true);
+        }
+       return false;
     }
 }

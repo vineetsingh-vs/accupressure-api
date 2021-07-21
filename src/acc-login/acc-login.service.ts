@@ -15,7 +15,7 @@ export class AccLoginService {
 			};
 		}
 		const userDoc = await this.loginModel.findOne(data);
-		if (!!userDoc['_doc']) {
+		if (!!userDoc && !!userDoc['_doc']) {
 			let user: User = userDoc['_doc'];
 			user['password'] = '';
 			return user;

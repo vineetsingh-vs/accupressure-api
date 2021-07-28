@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './schemas/login.schema';
+import {DecryptionService} from "./services/decryption.service";
 
 
 const modules = [
@@ -11,8 +12,8 @@ const modules = [
 @Module({
 	imports: [...modules],
 	controllers: [],
-	providers: [],
-	exports: [...modules]
+	providers: [DecryptionService],
+	exports: [...modules, DecryptionService]
 })
 export class CoreModule {
 }

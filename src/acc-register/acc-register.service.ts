@@ -8,14 +8,29 @@ import * as generatePassword from 'generate-password';
 export class AccRegisterService {
 	constructor(@InjectModel('User') private readonly userModel: Model<User>) {}
 	public async saveUsers(userDetail: User): Promise<User> {
+		let data;
+		if(userDetail.emailId.length > 0) {
+			data = {
+				emailId: userDetail.emailId
+			};
+		}
+		const existingUser = await this.userModel.findOne(data);
 		const password = generatePassword.generate({
 			length: 10,
 			numbers: true
 		});
-		userDetail.password = password;
-		userDetail.isActive = true;
-		userDetail.registrationDate = new Date();
 		const user = new this.userModel(userDetail);
-		return await user.save();
+		if (existingUser == null) {
+			userDetail.password = password;
+			userDetail.isActive = true;
+			userDetail.registrationDate = new Date();
+			return await user.save();
+		} else {
+			existingUser.password = password;
+			existingUser.isActive = true;
+			existingUser.registrationDate = new Date();
+			await this.userModel.updateOne({_id: existingUser._id}, existingUser);
+			return existingUser;
+		}
 	}
 }

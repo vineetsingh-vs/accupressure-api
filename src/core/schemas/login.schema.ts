@@ -5,9 +5,11 @@ export const UserSchema = new mongoose.Schema({
 		emailId: {
 			type: String,
 			required: true,
-			index: {unique: true, dropDups: true}
+			index: {unique: true}
 		},
 		password: String,
-		orderId: String
+		orderId: String,
+		registrationDate: Date,
+		isActive: Boolean
 	})
 ;

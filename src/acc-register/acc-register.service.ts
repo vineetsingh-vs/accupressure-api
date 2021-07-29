@@ -13,6 +13,8 @@ export class AccRegisterService {
 			numbers: true
 		});
 		userDetail.password = password;
+		userDetail.isActive = true;
+		userDetail.registrationDate = new Date();
 		const user = new this.userModel(userDetail);
 		return await user.save();
 	}

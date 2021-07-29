@@ -6,4 +6,6 @@ export interface User extends Document {
 	emailId: string;
 	password: string;
 	orderId: string;
+	registrationDate: Date;
+	isActive: boolean;
 }

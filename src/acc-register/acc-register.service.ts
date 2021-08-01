@@ -20,10 +20,10 @@ export class AccRegisterService {
 			numbers: true
 		});
 		const user = new this.userModel(userDetail);
-		if (existingUser == null) {
-			userDetail.password = password;
-			userDetail.isActive = true;
-			userDetail.registrationDate = new Date();
+		if (existingUser === null) {
+			user.password = password;
+			user.isActive = true;
+			user.registrationDate = new Date();
 			return await user.save();
 		} else {
 			existingUser.password = password;
